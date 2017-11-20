@@ -1,0 +1,16 @@
+version: "2"
+services:
+  logspout2:
+    environment:
+    - CATTLE_URL=http://RANCHER_API_UR::8080/v3
+    - CATTLE_ACCESS_KEY=API_KEY
+    - CATTLE_SECRET_KEY=SECRET_KEY
+    - ROUTE_URIS=logstash+tcp://LS_IP:5000
+    image: golang:alpine
+    stop_signal: SIGTERM
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    stdin_open: true
+    tty: true
+
