@@ -1,4 +1,4 @@
-package main
+package logstash
 
 import (
 	_ "github.com/gliderlabs/logspout/transports/tcp"
