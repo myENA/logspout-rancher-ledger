@@ -74,19 +74,35 @@ var cattleAccessKey = os.Getenv("CATTLE_ACCESS_KEY")
 var cattleSecretKey = os.Getenv("CATTLE_SECRET_KEY")
 ```
 ## Building 
-Follow the instructions in https://github.com/gliderlabs/logspout/tree/master/custom on how to build your own Logspout container with custom modules. These files are in the custom folder of the repo.
+Change directory to custom and `docker built -t logspout-rancher-ledger .`
 
-```go
-package main
+## Logstash config
 
-import (
-  _ "github.com/myENA/logspout-rancher-ledger"
-  _ "github.com/gliderlabs/logspout/transports/udp"
-  _ "github.com/gliderlabs/logspout/transports/tcp"
-)
+The below example is also in the local/logstash_conf dir for use with the local docker-compose.yml file which you will need to edit the 
+volume mount path for.
+```conf
+input {
+  tcp {
+    port => 5000
+  }
+}
+
+filter {
+  json {
+    source => "message"
+  }
+}
+
+output{
+  elasticsearch {
+    hosts => ["elasticsearch"]
+    index => "%{index}-%{+YYYY.MM.dd}"
+  }
+
+}
+
 ```
 
-in modules.go.
 ## Available configuration options
 You can also add arbitrary logstash fields to the event using the ```LOGSTASH_FIELDS``` container environment variable:
 

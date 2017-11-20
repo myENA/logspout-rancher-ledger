@@ -7,7 +7,7 @@ services:
   ls:
     image: logstash
     volumes:
-      - /home/dhendel/vols/ls:/config_dir
+      - /path/to/repo/local/logstash_conf:/config_dir
     links:
       - elasticsearch:elastic
     ports:
