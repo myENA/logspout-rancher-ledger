@@ -1,4 +1,4 @@
-package logstash
+package custom
 
 import (
 	_ "github.com/gliderlabs/logspout/transports/tcp"

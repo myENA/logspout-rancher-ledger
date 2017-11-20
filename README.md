@@ -74,7 +74,7 @@ var cattleAccessKey = os.Getenv("CATTLE_ACCESS_KEY")
 var cattleSecretKey = os.Getenv("CATTLE_SECRET_KEY")
 ```
 ## Building 
-`docker built -t logspout-rancher-ledger .`
+Change to custom directory and `docker built -t logspout-rancher-ledger .`
 
 ## Logstash config
 
