@@ -115,8 +115,13 @@ func GetRancherId(cID string) *client.Container {
 		log.Print(err)
 	}
 
-	// There should only ever be 1 container in the list thanks to our filter
-	return &container.Data[0]
+	if container.Data != nil {
+		// There should only ever be 1 container in the list thanks to our filter
+		return &container.Data[0]
+	} else {
+		return nil
+	}
+
 }
 
 // Add the RancherInfo to the cache
