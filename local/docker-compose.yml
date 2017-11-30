@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  elasticsearch:
+    image: elasticsearch:alpine
+
+  ls:
+    image: logstash
+    volumes:
+      - /path/to/repo/local/logstash_conf:/config_dir
+    links:
+      - elasticsearch:elastic
+    ports:
+      - 5000:5000
+    command:
+      - "logstash"
+      - "-f"
+      - "/config_dir/logstash.conf"
+
+  kibana:
+    image: kibana
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - 5601:5601
+
